@@ -22,7 +22,7 @@ if (!isset($_SESSION['loggedin'])) {
         tinymce.init({
             selector: '#editor',  // Wybór elementu, który ma być edytowany
             plugins: 'lists link image table code', // Wtyczki do użycia
-            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code', // Przyciski na pasku narzędzi
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code',
             height:500, // Wysokość edytora
             setup: function(editor) {
                 // Ładowanie pliku 'stronaglowna.php' po inicjalizacji edytora
@@ -76,6 +76,42 @@ if (!isset($_SESSION['loggedin'])) {
                 });
         }
     </script>
+    <script>
+        function uploadImage() {
+    const fileInput = document.getElementById('imageUpload');
+    const file = fileInput.files[0];
+
+    if (file) {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        fetch('upload.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                // Wstawienie obrazu do edytora
+                const imageUrl = data.url; // URL przesłanego obrazu
+                tinymce.get('editor').insertContent(`<img src="${imageUrl}" alt="Uploaded Image"/>`);
+                alert('Obraz został wgrany i dodany do edytora!');
+            } else {
+                alert('Wystąpił błąd podczas wgrywania obrazu.');
+            }
+        })
+        .catch(error => {
+            console.error('Error uploading image:', error);
+            alert('Nie udało się wgrać obrazu.');
+        });
+    } else {
+        alert('Proszę wybrać obraz do wgrania.');
+    }
+}
+        </script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -90,6 +126,11 @@ if (!isset($_SESSION['loggedin'])) {
 <button onclick="loadFromServer('uslugi.php')">Usługi</button>
 <button onclick="loadFromServer('kontakt.php')">Kontakt</button>
 
+<h2>Dodaj grafikę</h2>
+<form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" id="imageUpload" accept="image/*" />
+    <button type="button" onclick="uploadImage()">Wgraj obraz</button>
+</form>
 
 <form id="contentForm">
     <textarea id="editor"></textarea><br>

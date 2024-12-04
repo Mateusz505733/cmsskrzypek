@@ -3,7 +3,6 @@ session_start();
 
 // Przykładowe dane użytkowników (w praktyce powinny być w bazie danych)
 $users = [
-    "admin" => "admin123",
     "user" => "user123",
 ];
 
