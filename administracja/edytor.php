@@ -23,7 +23,7 @@ if (!isset($_SESSION['loggedin'])) {
             selector: '#editor',  // Wybór elementu, który ma być edytowany
             plugins: 'lists link image table code', // Wtyczki do użycia
             toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code', // Przyciski na pasku narzędzi
-            height: 300, // Wysokość edytora
+            height:500, // Wysokość edytora
             setup: function(editor) {
                 // Ładowanie pliku 'stronaglowna.php' po inicjalizacji edytora
                 loadFromServer(currentFileName);

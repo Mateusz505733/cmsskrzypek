@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wynjmnij Skrzypka</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
@@ -37,7 +37,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 Moja Strona. Wszelkie prawa zastrzeżone.</p>
+        <p>&copy; 2024 Mateusz Śmidoda</p>
     </footer>
 </body>
 </html>
